@@ -15,7 +15,7 @@
 * **Container OS:** Ubuntu 22.04 (Jammy Jellyfish)
 * **ROS2:** ROS2 Humble (Ubuntu 22.04의 공식 지원 버전)
 
-Docker 컨테이너는 RPi 5의 GPIO 하드웨어에 접근하기 위해 `--privileged` 또는 `--device=/dev/gpiochip4` 옵션으로 실행되어야 합니다.
+Docker 컨테이너는 RPi 5의 GPIO 하드웨어에 접근하기 위해 `--privileged` 옵션으로 실행되어야 합니다.
 
 ---
 
