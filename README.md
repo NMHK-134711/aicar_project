@@ -12,9 +12,7 @@
 
 ### 🌊 데이터 흐름도 (Node Workflow)
 
-```
-
-````
+![ROS2 Node Workflow](workflow.png)
 
 ---
 
