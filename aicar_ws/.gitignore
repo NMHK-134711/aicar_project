@@ -1,0 +1,25 @@
+# ROS 2 빌드 아티팩트
+/build/
+/install/
+/log/
+
+# Python 캐시
+*.pyc
+__pycache__/
+
+# OS 및 편집기 파일
+*.DS_Store
+.vscode/ .vscode-server/
+
+# 우리가 만든 임시 파일 및 테스트 스크립트
+calibration_input/
+calibration_images/
+*.p
+*.jpg
+*.bag
+save_frame.py
+teleop_test*.py
+create_calibration.py
+
+# Advance_LaneFinding (서브모듈이 아닌 경우)
+src/Advance_LaneFinding/
