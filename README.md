@@ -14,7 +14,6 @@
 
 ![ROS2 Node Workflow](workflow.png)
 
----
 
 ###  1. 👁️ 1단계: 인식 (Perception)
 
