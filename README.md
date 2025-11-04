@@ -6,6 +6,19 @@
 
 ---
 
+### 🖥️ OS 셋팅 (Operating Environment)
+
+본 프로젝트는 Raspberry Pi 5의 하드웨어 성능을 활용하면서, 안정적인 ROS2 Humble 배포판을 사용하기 위해 다층화된 OS 환경에서 개발되었습니다.
+
+* **Host OS:** Ubuntu 24.04 (라즈베리파이 5 호스트)
+* **플랫폼:** Docker
+* **Container OS:** Ubuntu 22.04 (Jammy Jellyfish)
+* **ROS2:** ROS2 Humble (Ubuntu 22.04의 공식 지원 버전)
+
+Docker 컨테이너는 RPi 5의 GPIO 하드웨어에 접근하기 위해 `--privileged` 또는 `--device=/dev/gpiochip4` 옵션으로 실행되어야 합니다.
+
+---
+
 ## 🚀 프로젝트 아키텍처 및 워크플로우
 
 본 시스템은 각각의 독립적인 기능을 수행하는 5개의 ROS2 노드가 유기적으로 연결되어 작동합니다. 전체 데이터 흐름은 "인식 → 판단 → 제어"의 3단계로 구성됩니다.
