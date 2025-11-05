@@ -63,8 +63,7 @@ class LaneDetectorNode(Node):
         
         # --- 1. 파라미터 로드 ---
         
-        # 카메라 보정 파일 경로 (이 파일이 반드시 있어야 함)
-        # 예: aicar_vision 패키지 폴더 내에 저장
+        # 'aicar_vision' 패키지가 설치된 공유 디렉토리 경로를 찾습니다.
         package_share_directory = get_package_share_directory('aicar_vision')
         
         # 'calibration.p' 파일의 기본 경로를 설정합니다.
@@ -95,21 +94,28 @@ class LaneDetectorNode(Node):
         self.img_width = 640
         self.img_height = 480
 
-        # BEV 변환 파라미터 (이전과 동일, 튜닝 필요)
+        # ===================================================================
+        # ★★★★★★★★★★★★★ (튜닝 완료된 좌표 적용) ★★★★★★★★★★★★★
+        # ===================================================================
+        # BEV 변환 전 원본 이미지의 4개 점 (사다리꼴)
         self.src_points = np.float32([
-            (int(self.img_width * 0.1), int(self.img_height * 0.9)),
-            (int(self.img_width * 0.4), int(self.img_height * 0.6)),
-            (int(self.img_width * 0.6), int(self.img_height * 0.6)),
-            (int(self.img_width * 0.9), int(self.img_height * 0.9))
-        ])
-        self.dst_points = np.float32([
-            (int(self.img_width * 0.2), int(self.img_height)),
-            (int(self.img_width * 0.2), 0),
-            (int(self.img_width * 0.8), 0),
-            (int(self.img_width * 0.8), int(self.img_height))
+            (5, 475),     # 좌하단
+            (180, 330),   # 좌상단
+            (430, 330),   # 우상단
+            (630, 475)    # 우하단
         ])
         
-        # BEV 변환 행렬 (M) 및 역변환 행렬 (Minv)
+        # BEV 변환 후 결과 이미지의 4개 점 (직사각형)
+        # (이 값은 src_points와 함께 튜닝해야 할 수 있으나, 일단 유지합니다.)
+        self.dst_points = np.float32([
+            (int(self.img_width * 0.2), int(self.img_height)), # 좌하단
+            (int(self.img_width * 0.2), 0),                    # 좌상단
+            (int(self.img_width * 0.8), 0),                    # 우상단
+            (int(self.img_width * 0.8), int(self.img_height))  # 우하단
+        ])
+        # ===================================================================
+        
+        # BEV 변환 행렬 계산
         self.M = cv2.getPerspectiveTransform(self.src_points, self.dst_points)
         self.Minv = cv2.getPerspectiveTransform(self.dst_points, self.src_points)
 
@@ -173,11 +179,32 @@ class LaneDetectorNode(Node):
         
         return combined_binary
 
+    #def warp_image(self, img):
+    #    """ 3. BEV 변환 """
+    #    return cv2.warpPerspective(img, self.M, 
+    #                               (self.img_width, self.img_height), 
+    #                               flags=cv2.INTER_LINEAR)
+
     def warp_image(self, img):
         """ 3. BEV 변환 """
-        return cv2.warpPerspective(img, self.M, 
-                                   (self.img_width, self.img_height), 
-                                   flags=cv2.INTER_LINEAR)
+        
+        # 1. 원본 이미지 전체를 BEV로 변환합니다 (기존 코드)
+        warped_img = cv2.warpPerspective(img, self.M, 
+                                         (self.img_width, self.img_height), 
+                                         flags=cv2.INTER_LINEAR)
+        # 2. 결과물(warped_img)과 똑같은 크기의 검은색 마스크를 생성합니다.
+        mask = np.zeros_like(warped_img)
+        
+        # 3. dst_points(직사각형) 좌표를 정수형(int32)으로 변환합니다.
+        dst_points_int = np.int32(self.dst_points)
+        
+        # 4. 마스크 위에 흰색으로 채워진 직사각형을 그립니다.
+        cv2.fillPoly(mask, [dst_points_int], (255))
+        
+        # 5. 변환된 이미지와 마스크를 AND 연산하여 직사각형 바깥을 검게 만듭니다.
+        masked_warped_img = cv2.bitwise_and(warped_img, mask)
+        
+        return masked_warped_img
 
     def find_lanes_sliding_window(self, binary_warped):
         """ 4. 슬라이딩 윈도우로 차선 픽셀 탐지 (추적 실패 시) """
