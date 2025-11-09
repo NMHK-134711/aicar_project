@@ -1,0 +1,45 @@
+[0.000000] (-) TimerEvent: {}
+[0.000433] (camera_ros) JobQueued: {'identifier': 'camera_ros', 'dependencies': OrderedDict()}
+[0.000782] (camera_ros) JobStarted: {'identifier': 'camera_ros'}
+[0.019296] (camera_ros) JobProgress: {'identifier': 'camera_ros', 'progress': 'cmake'}
+[0.020416] (camera_ros) Command: {'cmd': ['/usr/bin/cmake', '/root/camera_ws/src/camera_ros', '-DCMAKE_INSTALL_PREFIX=/root/camera_ws/src/install/camera_ros'], 'cwd': '/root/camera_ws/src/build/camera_ros', 'env': OrderedDict([('HOSTNAME', 'ubuntu'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root'), ('ROS_PYTHON_VERSION', '3'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('LD_PRELOAD', '/usr/local/lib/aarch64-linux-gnu/libcamera.so.0.5:/usr/local/lib/aarch64-linux-gnu/libcamera-base.so.0.5:/usr/local/lib/aarch64-linux-gnu/libpisp.so.1'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('PWD', '/root/camera_ws/src/build/camera_ros'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.045496] (camera_ros) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.099719] (-) TimerEvent: {}
+[0.200061] (-) TimerEvent: {}
+[0.239056] (camera_ros) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.272105] (camera_ros) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.275551] (camera_ros) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.283398] (camera_ros) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.296059] (camera_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.300139] (-) TimerEvent: {}
+[0.312546] (camera_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.354801] (camera_ros) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.356603] (camera_ros) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.400252] (-) TimerEvent: {}
+[0.491695] (camera_ros) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.500357] (-) TimerEvent: {}
+[0.560247] (camera_ros) StdoutLine: {'line': b'-- Found rclcpp_components: 16.0.15 (/opt/ros/humble/share/rclcpp_components/cmake)\n'}
+[0.585133] (camera_ros) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[0.600458] (-) TimerEvent: {}
+[0.633027] (camera_ros) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:23 (find_package):\n'}
+[0.633360] (camera_ros) StderrLine: {'line': b'  By not providing "Findcamera_info_manager.cmake" in CMAKE_MODULE_PATH this\n'}
+[0.633484] (camera_ros) StderrLine: {'line': b'  project has asked CMake to find a package configuration file provided by\n'}
+[0.633585] (camera_ros) StderrLine: {'line': b'  "camera_info_manager", but CMake did not find one.\n'}
+[0.633670] (camera_ros) StderrLine: {'line': b'\n'}
+[0.633742] (camera_ros) StderrLine: {'line': b'  Could not find a package configuration file provided by\n'}
+[0.633816] (camera_ros) StderrLine: {'line': b'  "camera_info_manager" with any of the following names:\n'}
+[0.633885] (camera_ros) StderrLine: {'line': b'\n'}
+[0.633950] (camera_ros) StderrLine: {'line': b'    camera_info_managerConfig.cmake\n'}
+[0.634016] (camera_ros) StderrLine: {'line': b'    camera_info_manager-config.cmake\n'}
+[0.634094] (camera_ros) StderrLine: {'line': b'\n'}
+[0.634173] (camera_ros) StderrLine: {'line': b'  Add the installation prefix of "camera_info_manager" to CMAKE_PREFIX_PATH\n'}
+[0.634241] (camera_ros) StderrLine: {'line': b'  or set "camera_info_manager_DIR" to a directory containing one of the above\n'}
+[0.634307] (camera_ros) StderrLine: {'line': b'  files.  If "camera_info_manager" provides a separate development package or\n'}
+[0.634372] (camera_ros) StderrLine: {'line': b'  SDK, be sure it has been installed.\n'}
+[0.634437] (camera_ros) StderrLine: {'line': b'\n'}
+[0.634501] (camera_ros) StderrLine: {'line': b'\x1b[0m\n'}
+[0.634565] (camera_ros) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.634814] (camera_ros) StdoutLine: {'line': b'See also "/root/camera_ws/src/build/camera_ros/CMakeFiles/CMakeOutput.log".\n'}
+[0.643546] (camera_ros) CommandEnded: {'returncode': 1}
+[0.682158] (camera_ros) JobEnded: {'identifier': 'camera_ros', 'rc': 1}
+[0.692740] (-) EventReactorShutdown: {}

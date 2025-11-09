@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'motor_controller_node = aicar_driver.motor_controller_node:main',
+            'differential_drive_node = aicar_driver.differential_drive_node:main',
         ],
     },
 )

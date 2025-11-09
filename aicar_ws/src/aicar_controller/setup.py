@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'pure_pursuit_node = aicar_controller.pure_pursuit_node:main',
+            'pid_controller_node = aicar_controller.pid_controller_node:main',
         ],
     },
 )

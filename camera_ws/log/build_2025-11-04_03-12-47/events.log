@@ -1,0 +1,406 @@
+[0.000000] (-) TimerEvent: {}
+[0.000442] (camera_ros) JobQueued: {'identifier': 'camera_ros', 'dependencies': OrderedDict()}
+[0.000795] (camera_ros) JobStarted: {'identifier': 'camera_ros'}
+[0.020247] (camera_ros) JobProgress: {'identifier': 'camera_ros', 'progress': 'cmake'}
+[0.021011] (camera_ros) Command: {'cmd': ['/usr/bin/cmake', '/root/camera_ws/src/camera_ros', '-DCMAKE_INSTALL_PREFIX=/root/camera_ws/install/camera_ros'], 'cwd': '/root/camera_ws/build/camera_ros', 'env': OrderedDict([('HOSTNAME', 'ubuntu'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/camera_ws/src'), ('ROS_PYTHON_VERSION', '3'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('LD_PRELOAD', '/usr/local/lib/aarch64-linux-gnu/libcamera.so.0.5:/usr/local/lib/aarch64-linux-gnu/libcamera-base.so.0.5:/usr/local/lib/aarch64-linux-gnu/libpisp.so.1'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('PWD', '/root/camera_ws/build/camera_ros'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.099673] (-) TimerEvent: {}
+[0.168616] (camera_ros) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.199790] (-) TimerEvent: {}
+[0.287629] (camera_ros) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.299904] (-) TimerEvent: {}
+[0.304556] (camera_ros) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.400038] (-) TimerEvent: {}
+[0.486137] (camera_ros) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.496769] (camera_ros) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.497158] (camera_ros) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.497749] (camera_ros) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.500139] (-) TimerEvent: {}
+[0.502302] (camera_ros) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.600268] (-) TimerEvent: {}
+[0.687708] (camera_ros) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.700364] (-) TimerEvent: {}
+[0.700771] (camera_ros) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.701193] (camera_ros) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.701905] (camera_ros) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.704671] (camera_ros) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.800475] (-) TimerEvent: {}
+[0.900811] (-) TimerEvent: {}
+[0.922068] (camera_ros) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[1.000931] (-) TimerEvent: {}
+[1.059954] (camera_ros) StdoutLine: {'line': b'-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") \n'}
+[1.061973] (camera_ros) StdoutLine: {'line': b'-- Found rclcpp: 16.0.15 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.101034] (-) TimerEvent: {}
+[1.107084] (camera_ros) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.7 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.112253] (camera_ros) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.7 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.121918] (camera_ros) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.7 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.136596] (camera_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.155844] (camera_ros) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.201137] (-) TimerEvent: {}
+[1.207374] (camera_ros) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[1.210021] (camera_ros) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.9 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.301252] (-) TimerEvent: {}
+[1.401650] (-) TimerEvent: {}
+[1.452915] (camera_ros) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/aarch64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[1.494015] (camera_ros) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[1.501751] (-) TimerEvent: {}
+[1.560578] (camera_ros) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[1.570314] (camera_ros) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[1.601878] (-) TimerEvent: {}
+[1.702264] (-) TimerEvent: {}
+[1.751695] (camera_ros) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[1.752574] (camera_ros) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[1.802380] (-) TimerEvent: {}
+[1.902752] (-) TimerEvent: {}
+[1.937320] (camera_ros) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[1.939015] (camera_ros) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[2.002852] (-) TimerEvent: {}
+[2.009480] (camera_ros) StdoutLine: {'line': b'-- Found rclcpp_components: 16.0.15 (/opt/ros/humble/share/rclcpp_components/cmake)\n'}
+[2.044927] (camera_ros) StdoutLine: {'line': b'-- Found sensor_msgs: 4.9.0 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[2.088139] (camera_ros) StdoutLine: {'line': b'-- Found camera_info_manager: 3.1.12 (/opt/ros/humble/share/camera_info_manager/cmake)\n'}
+[2.102417] (camera_ros) StdoutLine: {'line': b'-- Found cv_bridge: 3.2.1 (/opt/ros/humble/share/cv_bridge/cmake)\n'}
+[2.102931] (-) TimerEvent: {}
+[2.116214] (camera_ros) StdoutLine: {'line': b"-- Checking for module 'libcamera>=0.1'\n"}
+[2.167598] (camera_ros) StdoutLine: {'line': b'--   Found libcamera, version 0.5.2\n'}
+[2.203064] (-) TimerEvent: {}
+[2.303454] (-) TimerEvent: {}
+[2.312261] (camera_ros) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[2.403569] (-) TimerEvent: {}
+[2.449209] (camera_ros) StdoutLine: {'line': b"-- Added test 'clang_format' to check C / C++ code style\n"}
+[2.455508] (camera_ros) StdoutLine: {'line': b"-- Added test 'cppcheck' to perform static code analysis on C / C++ code\n"}
+[2.455791] (camera_ros) StdoutLine: {'line': b'-- Configured cppcheck include dirs: \n'}
+[2.455988] (camera_ros) StdoutLine: {'line': b'-- Configured cppcheck exclude dirs and/or files: \n'}
+[2.457235] (camera_ros) StdoutLine: {'line': b"-- Added test 'flake8' to check Python code syntax and style conventions\n"}
+[2.459186] (camera_ros) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[2.460470] (camera_ros) StdoutLine: {'line': b"-- Added test 'mypy' to statically type check Python code.\n"}
+[2.461752] (camera_ros) StdoutLine: {'line': b"-- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257\n"}
+[2.463017] (camera_ros) StdoutLine: {'line': b"-- Added test 'pyflakes' to perform static code analysis on Python code\n"}
+[2.464321] (camera_ros) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[2.467001] (camera_ros) StdoutLine: {'line': b'-- Configuring done\n'}
+[2.499640] (camera_ros) StdoutLine: {'line': b'-- Generating done\n'}
+[2.503660] (-) TimerEvent: {}
+[2.531672] (camera_ros) StdoutLine: {'line': b'-- Build files have been written to: /root/camera_ws/build/camera_ros\n'}
+[2.549941] (camera_ros) CommandEnded: {'returncode': 0}
+[2.550676] (camera_ros) JobProgress: {'identifier': 'camera_ros', 'progress': 'build'}
+[2.552339] (camera_ros) Command: {'cmd': ['/usr/bin/cmake', '--build', '/root/camera_ws/build/camera_ros', '--', '-j4', '-l4'], 'cwd': '/root/camera_ws/build/camera_ros', 'env': OrderedDict([('HOSTNAME', 'ubuntu'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/camera_ws/src'), ('ROS_PYTHON_VERSION', '3'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('LD_PRELOAD', '/usr/local/lib/aarch64-linux-gnu/libcamera.so.0.5:/usr/local/lib/aarch64-linux-gnu/libcamera-base.so.0.5:/usr/local/lib/aarch64-linux-gnu/libpisp.so.1'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('PWD', '/root/camera_ws/build/camera_ros'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[2.603795] (-) TimerEvent: {}
+[2.681329] (camera_ros) StdoutLine: {'line': b'[  7%] \x1b[32mBuilding CXX object CMakeFiles/utils.dir/src/pretty_print.cpp.o\x1b[0m\n'}
+[2.681863] (camera_ros) StdoutLine: {'line': b'[ 23%] \x1b[32mBuilding CXX object CMakeFiles/camera_node.dir/rclcpp_components/node_main_camera_node.cpp.o\x1b[0m\n'}
+[2.682712] (camera_ros) StdoutLine: {'line': b'[ 23%] \x1b[32mBuilding CXX object CMakeFiles/utils.dir/src/format_mapping.cpp.o\x1b[0m\n'}
+[2.683405] (camera_ros) StdoutLine: {'line': b'[ 30%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/clamp.cpp.o\x1b[0m\n'}
+[2.706255] (-) TimerEvent: {}
+[2.807672] (-) TimerEvent: {}
+[2.908264] (-) TimerEvent: {}
+[3.009122] (-) TimerEvent: {}
+[3.109594] (-) TimerEvent: {}
+[3.212193] (-) TimerEvent: {}
+[3.312695] (-) TimerEvent: {}
+[3.413197] (-) TimerEvent: {}
+[3.513710] (-) TimerEvent: {}
+[3.615178] (-) TimerEvent: {}
+[3.715630] (-) TimerEvent: {}
+[3.816142] (-) TimerEvent: {}
+[3.918215] (-) TimerEvent: {}
+[4.018727] (-) TimerEvent: {}
+[4.119265] (-) TimerEvent: {}
+[4.223501] (-) TimerEvent: {}
+[4.324111] (-) TimerEvent: {}
+[4.424588] (-) TimerEvent: {}
+[4.525118] (-) TimerEvent: {}
+[4.619011] (camera_ros) StdoutLine: {'line': b'[ 38%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/cv_to_pv.cpp.o\x1b[0m\n'}
+[4.625236] (-) TimerEvent: {}
+[4.703805] (camera_ros) StdoutLine: {'line': b'[ 38%] Built target utils\n'}
+[4.725399] (-) TimerEvent: {}
+[4.731181] (camera_ros) StdoutLine: {'line': b'[ 46%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/pv_to_cv.cpp.o\x1b[0m\n'}
+[4.825557] (-) TimerEvent: {}
+[4.929180] (-) TimerEvent: {}
+[5.029637] (-) TimerEvent: {}
+[5.130140] (-) TimerEvent: {}
+[5.230597] (-) TimerEvent: {}
+[5.331252] (-) TimerEvent: {}
+[5.431785] (-) TimerEvent: {}
+[5.493615] (camera_ros) StdoutLine: {'line': b'[ 53%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/types.cpp.o\x1b[0m\n'}
+[5.531926] (-) TimerEvent: {}
+[5.634181] (-) TimerEvent: {}
+[5.734666] (-) TimerEvent: {}
+[5.835166] (-) TimerEvent: {}
+[5.935667] (-) TimerEvent: {}
+[6.039194] (-) TimerEvent: {}
+[6.139730] (-) TimerEvent: {}
+[6.240273] (-) TimerEvent: {}
+[6.340763] (-) TimerEvent: {}
+[6.441266] (-) TimerEvent: {}
+[6.541787] (-) TimerEvent: {}
+[6.642282] (-) TimerEvent: {}
+[6.743248] (-) TimerEvent: {}
+[6.846206] (-) TimerEvent: {}
+[6.946730] (-) TimerEvent: {}
+[7.047219] (-) TimerEvent: {}
+[7.143574] (camera_ros) StdoutLine: {'line': b'[ 61%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/type_extent.cpp.o\x1b[0m\n'}
+[7.147509] (-) TimerEvent: {}
+[7.176280] (camera_ros) StdoutLine: {'line': b'[ 69%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/ParameterHandler.cpp.o\x1b[0m\n'}
+[7.250203] (-) TimerEvent: {}
+[7.350687] (-) TimerEvent: {}
+[7.451234] (-) TimerEvent: {}
+[7.544619] (camera_ros) StdoutLine: {'line': b'[ 76%] \x1b[32mBuilding CXX object CMakeFiles/param.dir/src/ParameterConflictHandler.cpp.o\x1b[0m\n'}
+[7.551368] (-) TimerEvent: {}
+[7.651857] (-) TimerEvent: {}
+[7.753419] (-) TimerEvent: {}
+[7.856208] (-) TimerEvent: {}
+[7.956754] (-) TimerEvent: {}
+[8.057200] (-) TimerEvent: {}
+[8.157645] (-) TimerEvent: {}
+[8.258165] (-) TimerEvent: {}
+[8.358892] (-) TimerEvent: {}
+[8.462209] (-) TimerEvent: {}
+[8.562718] (-) TimerEvent: {}
+[8.663201] (-) TimerEvent: {}
+[8.763743] (-) TimerEvent: {}
+[8.864314] (-) TimerEvent: {}
+[8.964759] (-) TimerEvent: {}
+[9.065202] (-) TimerEvent: {}
+[9.165658] (-) TimerEvent: {}
+[9.266958] (-) TimerEvent: {}
+[9.368713] (-) TimerEvent: {}
+[9.495178] (-) TimerEvent: {}
+[9.595605] (-) TimerEvent: {}
+[9.696060] (-) TimerEvent: {}
+[9.799191] (-) TimerEvent: {}
+[9.899702] (-) TimerEvent: {}
+[10.000135] (-) TimerEvent: {}
+[10.100568] (-) TimerEvent: {}
+[10.201002] (-) TimerEvent: {}
+[10.301478] (-) TimerEvent: {}
+[10.402245] (-) TimerEvent: {}
+[10.503052] (-) TimerEvent: {}
+[10.603448] (-) TimerEvent: {}
+[10.703825] (-) TimerEvent: {}
+[10.804192] (-) TimerEvent: {}
+[10.904563] (-) TimerEvent: {}
+[11.004931] (-) TimerEvent: {}
+[11.105298] (-) TimerEvent: {}
+[11.205652] (-) TimerEvent: {}
+[11.306014] (-) TimerEvent: {}
+[11.404684] (camera_ros) StdoutLine: {'line': b'[ 84%] \x1b[32m\x1b[1mLinking CXX executable camera_node\x1b[0m\n'}
+[11.406146] (-) TimerEvent: {}
+[11.506576] (-) TimerEvent: {}
+[11.607344] (-) TimerEvent: {}
+[11.707865] (-) TimerEvent: {}
+[11.788056] (camera_ros) StdoutLine: {'line': b'[ 84%] Built target camera_node\n'}
+[11.807977] (-) TimerEvent: {}
+[11.908349] (-) TimerEvent: {}
+[12.008707] (-) TimerEvent: {}
+[12.109056] (-) TimerEvent: {}
+[12.209423] (-) TimerEvent: {}
+[12.309776] (-) TimerEvent: {}
+[12.410135] (-) TimerEvent: {}
+[12.510450] (-) TimerEvent: {}
+[12.610757] (-) TimerEvent: {}
+[12.711056] (-) TimerEvent: {}
+[12.811350] (-) TimerEvent: {}
+[12.911647] (-) TimerEvent: {}
+[13.012013] (-) TimerEvent: {}
+[13.112407] (-) TimerEvent: {}
+[13.212782] (-) TimerEvent: {}
+[13.313093] (-) TimerEvent: {}
+[13.413365] (-) TimerEvent: {}
+[13.513669] (-) TimerEvent: {}
+[13.613959] (-) TimerEvent: {}
+[13.714263] (-) TimerEvent: {}
+[13.811091] (camera_ros) StdoutLine: {'line': b'[ 84%] Built target param\n'}
+[13.814414] (-) TimerEvent: {}
+[13.873479] (camera_ros) StdoutLine: {'line': b'[ 92%] \x1b[32mBuilding CXX object CMakeFiles/camera_component.dir/src/CameraNode.cpp.o\x1b[0m\n'}
+[13.914533] (-) TimerEvent: {}
+[14.014876] (-) TimerEvent: {}
+[14.115242] (-) TimerEvent: {}
+[14.215610] (-) TimerEvent: {}
+[14.315989] (-) TimerEvent: {}
+[14.416382] (-) TimerEvent: {}
+[18.026328] (-) TimerEvent: {}
+[18.126719] (-) TimerEvent: {}
+[18.227090] (-) TimerEvent: {}
+[18.327452] (-) TimerEvent: {}
+[18.427804] (-) TimerEvent: {}
+[18.528154] (-) TimerEvent: {}
+[18.628523] (-) TimerEvent: {}
+[18.728881] (-) TimerEvent: {}
+[18.829276] (-) TimerEvent: {}
+[18.929651] (-) TimerEvent: {}
+[19.029997] (-) TimerEvent: {}
+[19.130361] (-) TimerEvent: {}
+[19.230713] (-) TimerEvent: {}
+[19.331069] (-) TimerEvent: {}
+[19.431417] (-) TimerEvent: {}
+[19.531804] (-) TimerEvent: {}
+[19.632167] (-) TimerEvent: {}
+[19.732504] (-) TimerEvent: {}
+[19.832857] (-) TimerEvent: {}
+[19.933230] (-) TimerEvent: {}
+[20.033577] (-) TimerEvent: {}
+[20.133921] (-) TimerEvent: {}
+[20.234287] (-) TimerEvent: {}
+[20.334647] (-) TimerEvent: {}
+[20.435002] (-) TimerEvent: {}
+[20.535375] (-) TimerEvent: {}
+[20.635725] (-) TimerEvent: {}
+[20.736087] (-) TimerEvent: {}
+[20.836430] (-) TimerEvent: {}
+[20.936786] (-) TimerEvent: {}
+[21.037136] (-) TimerEvent: {}
+[21.137477] (-) TimerEvent: {}
+[21.237820] (-) TimerEvent: {}
+[21.338164] (-) TimerEvent: {}
+[21.438519] (-) TimerEvent: {}
+[21.538869] (-) TimerEvent: {}
+[21.639305] (-) TimerEvent: {}
+[21.739658] (-) TimerEvent: {}
+[21.840027] (-) TimerEvent: {}
+[21.940401] (-) TimerEvent: {}
+[22.040755] (-) TimerEvent: {}
+[22.141120] (-) TimerEvent: {}
+[22.241481] (-) TimerEvent: {}
+[22.341818] (-) TimerEvent: {}
+[22.442149] (-) TimerEvent: {}
+[22.542488] (-) TimerEvent: {}
+[22.642829] (-) TimerEvent: {}
+[22.743173] (-) TimerEvent: {}
+[22.843512] (-) TimerEvent: {}
+[22.943848] (-) TimerEvent: {}
+[23.044225] (-) TimerEvent: {}
+[23.144580] (-) TimerEvent: {}
+[23.244938] (-) TimerEvent: {}
+[23.345309] (-) TimerEvent: {}
+[23.445669] (-) TimerEvent: {}
+[23.546017] (-) TimerEvent: {}
+[23.646394] (-) TimerEvent: {}
+[23.746737] (-) TimerEvent: {}
+[23.847116] (-) TimerEvent: {}
+[23.947476] (-) TimerEvent: {}
+[24.047840] (-) TimerEvent: {}
+[24.148216] (-) TimerEvent: {}
+[24.248569] (-) TimerEvent: {}
+[24.348924] (-) TimerEvent: {}
+[24.449296] (-) TimerEvent: {}
+[24.549659] (-) TimerEvent: {}
+[24.650142] (-) TimerEvent: {}
+[25.802520] (-) TimerEvent: {}
+[25.902898] (-) TimerEvent: {}
+[26.003278] (-) TimerEvent: {}
+[26.103632] (-) TimerEvent: {}
+[26.203991] (-) TimerEvent: {}
+[26.304383] (-) TimerEvent: {}
+[26.404732] (-) TimerEvent: {}
+[26.505111] (-) TimerEvent: {}
+[26.605457] (-) TimerEvent: {}
+[26.705803] (-) TimerEvent: {}
+[26.806141] (-) TimerEvent: {}
+[26.906484] (-) TimerEvent: {}
+[27.006833] (-) TimerEvent: {}
+[27.107218] (-) TimerEvent: {}
+[27.207581] (-) TimerEvent: {}
+[27.307937] (-) TimerEvent: {}
+[27.408220] (-) TimerEvent: {}
+[27.508454] (-) TimerEvent: {}
+[27.608678] (-) TimerEvent: {}
+[27.708899] (-) TimerEvent: {}
+[27.809122] (-) TimerEvent: {}
+[27.909349] (-) TimerEvent: {}
+[28.009573] (-) TimerEvent: {}
+[28.109801] (-) TimerEvent: {}
+[28.210026] (-) TimerEvent: {}
+[28.310267] (-) TimerEvent: {}
+[28.410492] (-) TimerEvent: {}
+[28.510762] (-) TimerEvent: {}
+[28.611054] (-) TimerEvent: {}
+[28.711319] (-) TimerEvent: {}
+[28.811557] (-) TimerEvent: {}
+[28.911789] (-) TimerEvent: {}
+[29.012015] (-) TimerEvent: {}
+[29.112257] (-) TimerEvent: {}
+[29.212475] (-) TimerEvent: {}
+[29.312700] (-) TimerEvent: {}
+[29.412977] (-) TimerEvent: {}
+[29.513271] (-) TimerEvent: {}
+[29.613528] (-) TimerEvent: {}
+[29.713759] (-) TimerEvent: {}
+[29.814013] (-) TimerEvent: {}
+[33.011834] (-) TimerEvent: {}
+[33.112188] (-) TimerEvent: {}
+[33.212519] (-) TimerEvent: {}
+[33.312845] (-) TimerEvent: {}
+[33.413179] (-) TimerEvent: {}
+[33.513524] (-) TimerEvent: {}
+[33.613864] (-) TimerEvent: {}
+[33.714214] (-) TimerEvent: {}
+[33.814563] (-) TimerEvent: {}
+[33.914901] (-) TimerEvent: {}
+[34.015256] (-) TimerEvent: {}
+[34.115595] (-) TimerEvent: {}
+[34.215927] (-) TimerEvent: {}
+[34.316274] (-) TimerEvent: {}
+[34.416600] (-) TimerEvent: {}
+[34.516935] (-) TimerEvent: {}
+[34.617302] (-) TimerEvent: {}
+[34.717569] (-) TimerEvent: {}
+[34.817808] (-) TimerEvent: {}
+[34.918066] (-) TimerEvent: {}
+[35.111174] (-) TimerEvent: {}
+[35.211608] (-) TimerEvent: {}
+[35.311958] (-) TimerEvent: {}
+[35.412336] (-) TimerEvent: {}
+[35.512686] (-) TimerEvent: {}
+[35.613039] (-) TimerEvent: {}
+[35.713406] (-) TimerEvent: {}
+[35.813762] (-) TimerEvent: {}
+[35.914138] (-) TimerEvent: {}
+[36.014517] (-) TimerEvent: {}
+[36.114934] (-) TimerEvent: {}
+[36.183046] (camera_ros) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX shared library libcamera_component.so\x1b[0m\n'}
+[36.215054] (-) TimerEvent: {}
+[36.315511] (-) TimerEvent: {}
+[36.415972] (-) TimerEvent: {}
+[36.516446] (-) TimerEvent: {}
+[36.616920] (-) TimerEvent: {}
+[36.717438] (-) TimerEvent: {}
+[36.817947] (-) TimerEvent: {}
+[36.918371] (-) TimerEvent: {}
+[37.018727] (-) TimerEvent: {}
+[37.119169] (-) TimerEvent: {}
+[37.219611] (-) TimerEvent: {}
+[37.319950] (-) TimerEvent: {}
+[37.348402] (camera_ros) StdoutLine: {'line': b'[100%] Built target camera_component\n'}
+[37.374780] (camera_ros) CommandEnded: {'returncode': 0}
+[37.375592] (camera_ros) JobProgress: {'identifier': 'camera_ros', 'progress': 'install'}
+[37.393172] (camera_ros) Command: {'cmd': ['/usr/bin/cmake', '--install', '/root/camera_ws/build/camera_ros'], 'cwd': '/root/camera_ws/build/camera_ros', 'env': OrderedDict([('HOSTNAME', 'ubuntu'), ('ROS_APT_SOURCE_VERSION', '1.1.0'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/root/camera_ws/src'), ('ROS_PYTHON_VERSION', '3'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('LD_PRELOAD', '/usr/local/lib/aarch64-linux-gnu/libcamera.so.0.5:/usr/local/lib/aarch64-linux-gnu/libcamera-base.so.0.5:/usr/local/lib/aarch64-linux-gnu/libpisp.so.1'), ('LANG', 'en_US.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('PWD', '/root/camera_ws/build/camera_ros'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[37.408470] (camera_ros) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[37.408841] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/lib/camera_ros/camera_node\n'}
+[37.410104] (camera_ros) StdoutLine: {'line': b'-- Set runtime path of "/root/camera_ws/install/camera_ros/lib/camera_ros/camera_node" to ""\n'}
+[37.410417] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/environment/library_path.sh\n'}
+[37.410776] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/environment/library_path.dsv\n'}
+[37.411114] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/lib/libcamera_component.so\n'}
+[37.420041] (-) TimerEvent: {}
+[37.421355] (camera_ros) StdoutLine: {'line': b'-- Set runtime path of "/root/camera_ws/install/camera_ros/lib/libcamera_component.so" to ""\n'}
+[37.421579] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros//launch\n'}
+[37.421789] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros//launch/camera.launch.py\n'}
+[37.422201] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/ament_index/resource_index/package_run_dependencies/camera_ros\n'}
+[37.422601] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/ament_index/resource_index/parent_prefix_path/camera_ros\n'}
+[37.422897] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/environment/ament_prefix_path.sh\n'}
+[37.423172] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/environment/ament_prefix_path.dsv\n'}
+[37.423466] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/environment/path.sh\n'}
+[37.423740] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/environment/path.dsv\n'}
+[37.424032] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/local_setup.bash\n'}
+[37.424318] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/local_setup.sh\n'}
+[37.424606] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/local_setup.zsh\n'}
+[37.424898] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/local_setup.dsv\n'}
+[37.425172] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/package.dsv\n'}
+[37.425543] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/ament_index/resource_index/packages/camera_ros\n'}
+[37.425867] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/ament_index/resource_index/rclcpp_components/camera_ros\n'}
+[37.426248] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/cmake/camera_componentTargetsExport.cmake\n'}
+[37.426549] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/cmake/camera_componentTargetsExport-noconfig.cmake\n'}
+[37.426836] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[37.427112] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[37.427439] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/cmake/camera_rosConfig.cmake\n'}
+[37.427680] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/cmake/camera_rosConfig-version.cmake\n'}
+[37.427971] (camera_ros) StdoutLine: {'line': b'-- Installing: /root/camera_ws/install/camera_ros/share/camera_ros/package.xml\n'}
+[37.431333] (camera_ros) CommandEnded: {'returncode': 0}
+[37.466320] (camera_ros) JobEnded: {'identifier': 'camera_ros', 'rc': 0}
+[37.467291] (-) EventReactorShutdown: {}
