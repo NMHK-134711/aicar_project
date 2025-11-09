@@ -60,30 +60,32 @@ Docker 컨테이너는 RPi 5의 GPIO 하드웨어에 접근하기 위해 `--priv
 
 ###  2. 🧠 2단계: 판단 (Decision Making)
 
-인식된 정보를 바탕으로 차량이 "어떻게 움직여야 할지" 결정하는 단계입니다.
+인식된 정보를 바탕으로 차량이 "어떻게 움직여야 할지" 결정하는 단계입니다. 기존 Pure Pursuit 방식에서 응답성이 더 뛰어난 PID 제어 방식으로 변경되었습니다.
 
-#### (4) 자율주행 노드 (`aicar_controller`)
-* **역할:** 시스템의 "뇌" (알고리즘)
+#### (4) PID 제어 노드 (`pid_controller_node`)
+* **역할:** 시스템의 "뇌" (주행 알고리즘)
 * **구독 (Input):**
     1.  `/image_bev_binary` (차선 경로)
     2.  `/sign_detection` (표지판 규칙)
 * **작업:**
-    1.  **경로 추종:** `/image_bev_binary` (BEV 이미지)의 차선 중앙을 경로로 간주하고, **Pure Pursuit** 알고리즘을 사용해 이 경로를 따라갈 **조향각(steering_angle)**을 계산합니다.
-    2.  **규칙 준수:** `/sign_detection` 토픽을 감시하여, 만약 "stop" 메시지를 받으면 `vehicle_speed`를 0으로 설정하고 3초간 정지하는 **상태 머신(State Machine)**을 실행합니다.
-* **발행 (Output):** `/drive` (Type: `ackermann_msgs/AckermannDriveStamped`)
-    * 차량의 목표 속도(예: 0.5m/s)와 계산된 조향각(예: 0.15 rad)이 포함된 표준 제어 명령입니다.
+    1.  **조향각 계산 (PID Control):** BEV 이미지의 특정 전방 지점(`lookahead_row_offset`)에서 차선 중심과 차량 중심 사이의 오차(error)를 계산합니다. 이 오차에 대해 **PID(비례-적분-미분)** 제리기법을 적용하여 목표 각속도(`angular.z`)를 계산합니다.
+        * *P(비례):* 트랙 중심에서 벗어난 만큼 빠르게 복귀하려 합니다.
+        * *D(미분):* 급격한 조향으로 인한 진동(wobble)을 억제하여 부드러운 주행을 구현합니다.
+    2.  **규칙 준수:** `/sign_detection` 토픽을 감시하여, "stop" 표지판 인식 시 설정된 시간(`stop_duration`) 동안 정지하는 상태 머신을 실행합니다.
+* **발행 (Output):** `/cmd_vel` (Type: `geometry_msgs/Twist`)
+    * 기존의 조향각 전용 메시지 대신, ROS2 표준 속도 명령인 **Twist** 메시지를 사용하여 선속도(linear.x)와 각속도(angular.z)를 함께 발행합니다.
 
 ---
 
 ###  3. 💪 3단계: 제어 (Control)
 
-판단된 제어 명령을 실제 하드웨어의 "근육"으로 전달하는 단계입니다.
+판단된 상위 레벨의 속도 명령을 실제 하드웨어 특성에 맞게 변환하여 모터를 구동하는 단계입니다.
 
-#### (5) 모터 제어 노드 (`aicar_driver`)
-* **역할:** 시스템의 "근육" (하드웨어 드라이버)
-* **구독 (Input):** `/drive`
+#### (5) 차동 구동 노드 (`differential_drive_node`)
+* **역할:** 시스템의 "근육" (모터 드라이버)
+* **구독 (Input):** `/cmd_vel` (`geometry_msgs/Twist`)
 * **작업:**
-    1.  **로직 변환:** `Ackermann` 메시지(앞바퀴 조향각 개념)를 2륜 모터 하드웨어에 맞는 **스키드 스티어(Skid Steer)** 로직(탱크처럼 좌우 바퀴의 속도를 다르게 하는)으로 변환합니다.
-    2.  **저수준 제어:** RPi 5의 `gpiochip4`에 직접 접근하기 위해 `gpiozero` 대신 저수준 **`lgpio`** 라이브러리를 사용합니다.
-    3.  AIN/BIN 핀으로 방향을 설정하고, PWM 핀으로 `lgpio.tx_pwm` 신호를 보내 모터 속도를 정밀하게 제어합니다.
-* **출력 (Output):** 실제 모터 구동
+    1.  **역기구학(Inverse Kinematics):** 로봇의 선속도($v$)와 각속도($\omega$)를 입력받아, 두 바퀴 사이의 거리($L$, `wheel_separation`)를 고려한 **차동 구동 모델** 공식을 통해 좌/우 바퀴의 필요 속도를 계산합니다.
+        * $v_{left} = v - \frac{\omega L}{2}, \quad v_{right} = v + \frac{\omega L}{2}$
+    2.  **모터 제어:** 계산된 m/s 단위의 속도를 모터 드라이버의 PWM 듀티비로 변환하고, `lgpio` 라이브러리를 이용해 RPi 5의 하드웨어 핀에 신호를 인가합니다.
+* **출력 (Output):** 좌우 DC 모터 개별 속도 제어
