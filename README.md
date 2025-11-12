@@ -12,10 +12,10 @@
 
   * **Host OS:** Ubuntu 24.04 (라즈베리파이 5 호스트)
   * **플랫폼:** Docker
-  * **Container OS:** Ubuntu 22.04
+  * **Container OS:** Ubuntu 22.04 
   * **ROS2:** ROS2 Humble
 
-Docker 컨테이너는 RPi 5의 GPIO 및 I2C 하드웨어에 접근하기 위해 `--privileged` 옵션으로 실행되어야 합니다.
+Docker 컨테이너는 RPi 5의 GPIO 및 하드웨어에 접근하기 위해 `--privileged` 옵션으로 실행되어야 합니다.
 
 -----
 
@@ -27,7 +27,7 @@ Docker 컨테이너는 RPi 5의 GPIO 및 I2C 하드웨어에 접근하기 위해
 
 ### 1\. 👁️ 1단계: 인식 (Perception)
 
-로봇이 "보고" "이해"하는 단계입니다. 2개의 핵심 인식 노드가 카메라의 원본 이미지를 처리합니다.
+로봇이 "보고" "이해"하는 단계입니다. 3개의 핵심 인식 노드가 카메라의 원본 이미지를 처리합니다.
 
 #### (1) 카메라 노드 (`camera_ros`)
 
@@ -46,8 +46,16 @@ Docker 컨테이너는 RPi 5의 GPIO 및 I2C 하드웨어에 접근하기 위해
     3.  **모폴로지 연산:** 얇은 차선을 더 잘 인식하도록 `dilate` (팽창) 연산을 적용하여 선을 두껍게 만듭니다.
     4.  **BEV 변환:** 원근감이 있는 이미지를 하늘에서 내려다본 **Bird's Eye View (BEV)** 이미지로 변환합니다.
   * **발행 (Output):**
-      * `/image_processed` (표지판 인식용 왜곡 보정 이미지)
+      * `/image_processed` (디버깅용 왜곡 보정 이미지)
       * `/image_bev_binary` (차선만 하얗게 표시된 BEV 이미지)
+
+#### (3) 표지판 인식 노드 (sign_detection_node) (예정)
+
+  * **역할:** "신호등(규칙) 인식"
+  * **구독 (Input):** `/camera_node/image_raw`
+  * **작업 (계획):** YOLO 같은 경량화된 객체 감지 모델을 사용하여 'stop', 'left\_turn', 'slow', 'horn', 'traffic\_light\_red' 등의 표지판을 인식합니다.
+  * **발행 (Output):** `/sign_detection` (Type: `std_msgs/String`)
+      * 평소에는 아무 메시지도 발행하지 않다가, 표지판을 인식하는 순간에만 해당 문자열(예: "stop")을 **한 번만** 발행합니다.
 
 -----
 
@@ -55,7 +63,7 @@ Docker 컨테이너는 RPi 5의 GPIO 및 I2C 하드웨어에 접근하기 위해
 
 인식된 정보를 바탕으로 차량이 "어떻게 움직여야 할지" 결정하는 단계입니다.
 
-#### (3) PID 제어 노드 (`pid_controller_node`)
+#### (4) PID 제어 노드 (`pid_controller_node`)
 
   * **역할:** 시스템의 "뇌" (주행 알고리즘)
   * **구독 (Input):**
@@ -75,7 +83,7 @@ Docker 컨테이너는 RPi 5의 GPIO 및 I2C 하드웨어에 접근하기 위해
 
 판단된 상위 레벨의 속도 명령을 실제 하드웨어 특성에 맞게 변환하여 모터를 구동하는 단계입니다.
 
-#### (4) 차동 구동 노드 (`differential_drive_node`)
+#### (5) 차동 구동 노드 (`differential_drive_node`)
 
   * **역할:** 시스템의 "근육" (모터 드라이버)
   * **구독 (Input):** `/cmd_vel` (`geometry_msgs/Twist`)
@@ -84,8 +92,3 @@ Docker 컨테이너는 RPi 5의 GPIO 및 I2C 하드웨어에 접근하기 위해
           * $v_{left} = v - \frac{(\omega \cdot gain) L}{2}, \quad v_{right} = v + \frac{(\omega \cdot gain) L}{2}$
     2.  **모터 제어:** 계산된 m/s 단위의 속도를 모터 드라이버의 PWM 듀티비(-100\~100)로 변환하고, `lgpio` 라이브러리를 이용해 RPi 5의 하드웨어 핀에 신호를 인가하여 모터를 직접 구동합니다.
   * **출력 (Output):** 좌우 DC 모터 개별 속도 제어
-
-
-#### (2) 표지판 인식 테스트
-
-개발 및 디버깅 단계에서는, 실제 YOLO 모델 대신 터미널 입력을 받아 `/sign_detection` 토픽을 발행하는 `fake_detector_node`를 별도의 터미널에서 실행하여 테스트를 진행했습니다.
