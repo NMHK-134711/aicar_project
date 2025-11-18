@@ -1,0 +1,14 @@
+path: .
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 7
+names: ['20_sign', 'front_sing', 'horn_sign', 'left_turn_sign', 'right_turn_sign', 'stop_sign', 'traffic_light']
+
+roboflow:
+  workspace: aicarpj
+  project: aicar-4ceqj
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/aicarpj/aicar-4ceqj/dataset/1
