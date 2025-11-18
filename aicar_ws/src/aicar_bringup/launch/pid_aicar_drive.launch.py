@@ -24,6 +24,12 @@ def generate_launch_description():
         name='lane_detector_node'
     )
 
+    sign_detector_node = Node(
+        package='aicar_vision',
+        executable='sign_detector_node',
+        name='sign_detector_node'
+    )
+
     controller_node = Node(
         package='aicar_controller',
         executable='pid_controller_node',
@@ -42,4 +48,5 @@ def generate_launch_description():
         lane_detector_node,
         controller_node,
         motor_driver_node,
+        sign_detector_node,
     ])
