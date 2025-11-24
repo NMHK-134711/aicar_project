@@ -50,7 +50,7 @@ Docker 컨테이너는 RPi 5의 GPIO 및 하드웨어에 접근하기 위해 `--
   * **발행 (Output):**
       * `/image_bev_binary` (주행용 노란색 차선 BEV)
       * `/image_red_bev` (종료 확인용 빨간색 라인 BEV)
-      * `/image_processed` (디버깅용 원본 보정 이미지)
+      * `/image_processed` (표지판 인식용 보정 이미지)
 
 #### (3) 표지판 인식 노드 (`sign_detector_node`)
 
@@ -85,7 +85,6 @@ Docker 컨테이너는 RPi 5의 GPIO 및 하드웨어에 접근하기 위해 `--
         * `PRE_TURN_STRAIGHT` / `TURNING` / `POST_TURN_STRAIGHT`: 교차로 회전 시퀀스 수행
         * `FINISHED`: 빨간색 종료선을 감지하면 주행을 영구 정지
     3.  **PID 제어:** BEV 이미지에서 차선 중심과 차량 중심의 오차(error)를 계산하고, PID 알고리즘을 통해 목표 조향각(angular.z)을 산출합니다.
-    4.  **명령 지연 큐:** 카메라 처리 속도와 구동계의 지연을 보정하기 위해 제어 명령을 `deque`에 담아 약 0.7초 지연 후 발행합니다.
   * **발행 (Output):** `/cmd_vel` (Type: `geometry_msgs/Twist`)
       * 선속도(linear.x)와 각속도(angular.z) 명령을 발행합니다.
 
