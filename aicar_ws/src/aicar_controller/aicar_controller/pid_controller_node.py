@@ -9,36 +9,36 @@ import numpy as np
 import time
 from collections import deque
 import lgpio 
+# sys, termios, tty, select (키보드 관련 모듈은 제거됨)
 
 # --- 상태 상수 정의 ---
-STATE_WAITING_FOR_SYSTEM = 'WAITING_FOR_SYSTEM'
+STATE_WAITING_FOR_SYSTEM = 'WAITING_FOR_SYSTEM' # AI 모델 준비 대기
 STATE_NORMAL = 'NORMAL'
-STATE_STOP_WAIT = 'STOP_WAIT'
-STATE_PRE_TURN_STRAIGHT = 'PRE_TURN_STRAIGHT'
+STATE_STOP_WAIT = 'STOP_WAIT'         # 정지 후 대기
 STATE_TURNING = 'TURNING'
 STATE_POST_TURN_STRAIGHT = 'POST_TURN_STRAIGHT'
-STATE_FINISHED = 'FINISHED'
+STATE_FINISHED = 'FINISHED'           # 완주 후 정지
 
 BUZZER_PIN = 12
-BUZZER_FREQ = 2000
+BUZZER_FREQ = 1500
 
 class PIDControllerNode(Node):
     def __init__(self):
         super().__init__('pid_controller_node')
-        self.get_logger().info('PID Controller Node (Waiting for Sign Detector...) started.')
+        self.get_logger().info('PID Controller Node (FINAL ROBUST VERSION) started.')
 
         self.bridge = CvBridge()
 
-        # --- 파라미터 ---
+        # --- 1. 파라미터 ---
         self.declare_parameter('vehicle_speed', 0.2)
         self.declare_parameter('ym_per_pix', 0.01)
         self.declare_parameter('xm_per_pix', 0.005)
         self.declare_parameter('half_track_width_pixels', 250)
-        self.declare_parameter('kp', 0.38)
+        self.declare_parameter('kp', 0.85)
         self.declare_parameter('ki', 0.0)
         self.declare_parameter('kd', 0.2)
         self.declare_parameter('lookahead_row_offset', 20)
-        self.declare_parameter('cmd_delay', 0.7)
+        self.declare_parameter('cmd_delay', 0.0) 
 
         self.base_speed = self.get_parameter('vehicle_speed').get_parameter_value().double_value
         self.xm_per_pix = self.get_parameter('xm_per_pix').get_parameter_value().double_value
@@ -53,17 +53,20 @@ class PIDControllerNode(Node):
         self.integral_error = 0.0
         self.prev_time = self.get_clock().now().nanoseconds / 1e9
 
-        # --- [수정] 초기 상태를 대기 상태로 설정 ---
-        self.drive_state = STATE_WAITING_FOR_SYSTEM 
+        # --- 주행 상태 머신 변수 ---
+        self.drive_state = STATE_WAITING_FOR_SYSTEM # 초기 상태: 대기
         
         self.state_start_time = 0.0
         self.turn_direction = 0.0 
         self.stop_wait_time = 0.0        
         self.next_state_after_stop = STATE_NORMAL
 
-        self.detected_signs = set()
-        self.current_sign = None
+        # --- 표지판 및 이벤트 로직 변수 ---
+        self.detected_signs = set() 
+        self.current_sign = None    
         self.slow_mode_end_time = 0.0
+        self.slow_sign_name = 'slow' 
+        self.last_buzzer_time = 0.0 # 초기화 복구
 
         self.h = lgpio.gpiochip_open(4)
         lgpio.gpio_claim_output(self.h, BUZZER_PIN)
@@ -73,14 +76,10 @@ class PIDControllerNode(Node):
         # --- 구독 설정 ---
         self.subscription = self.create_subscription(
             Image, '/image_bev_binary', self.bev_callback, 10)
-        
         self.red_subscription = self.create_subscription(
             Image, '/image_red_bev', self.red_bev_callback, 10)
-
         self.sign_subscription = self.create_subscription(
             String, '/sign_detection', self.sign_callback, 10)
-
-        # [신규] 시스템 상태 구독
         self.status_subscription = self.create_subscription(
             String, '/system_status', self.status_callback, 10)
         
@@ -89,88 +88,108 @@ class PIDControllerNode(Node):
 
         self.create_timer(0.01, self.timer_callback)
 
-    # --- [신규] 시스템 상태 콜백 ---
+    def cleanup_after_sign(self, current_sign_name):
+        """ 동작 완료 후 해당 표지판을 detected_signs Set에서 제거 (반복 가능하게 함) """
+        if current_sign_name in self.detected_signs:
+            self.detected_signs.discard(current_sign_name)
+            self.current_sign = None
+
+    def set_state(self, new_state):
+        self.drive_state = new_state
+        self.state_start_time = self.get_clock().now().nanoseconds / 1e9
+        self.get_logger().info(f'State changed to: {new_state}')
+        
+        # [강건성] Stop, Turn, Finish 상태 진입 시 명령 버퍼를 비워 overshoot 방지
+        if new_state in [STATE_STOP_WAIT, STATE_TURNING, STATE_FINISHED]:
+            self.cmd_buffer.clear()
+
     def status_callback(self, msg):
-        # 대기 상태일 때 "system_ready" 신호를 받으면 주행 시작
         if self.drive_state == STATE_WAITING_FOR_SYSTEM:
             if msg.data == "system_ready":
                 self.get_logger().info(">>> System Ready Signal Received! STARTING DRIVE.")
                 self.set_state(STATE_NORMAL)
 
     def red_bev_callback(self, msg):
-        if self.drive_state == STATE_FINISHED or self.drive_state == STATE_WAITING_FOR_SYSTEM:
-            return 
-        if self.drive_state != STATE_NORMAL:
-            return
+        # 종료 로직은 NORMAL 상태에서만 작동
+        if self.drive_state != STATE_NORMAL: return 
 
         try:
             red_bev = self.bridge.imgmsg_to_cv2(msg, "mono8")
             h, w = red_bev.shape
         except: return
 
-        check_row = int(h * 0.85)
-        if check_row >= h: check_row = h - 1
+        # --- 1. 검사 영역 정의 ---
+        h_start = int(h * 0.80)
         
-        row_pixels = red_bev[check_row, :]
-        white_count = np.count_nonzero(row_pixels)
+        # 중앙 60%
+        w_start = int(w * 0.20)
+        w_end = int(w * 0.80)
         
-        if white_count > w * 0.7:
-            self.get_logger().warn("FINISH LINE DETECTED! Stopping Robot.")
+        # 2. 검사할 영역(Detection Zone)을 하단 중앙 60%로 슬라이싱
+        detection_zone = red_bev[h_start:h, w_start:w_end]
+        
+        # 3. 해당 영역의 흰색 픽셀(빨간색 띠) 면적 밀도 계산
+        total_white_pixels = np.sum(detection_zone) / 255.0 
+        zone_area = detection_zone.size 
+        white_density = total_white_pixels / zone_area
+        
+        # 4. 임계값 (40%) 이상이면 종료선으로 간주하여 정지
+        if white_density > 0.40: 
+            self.get_logger().warn("🔴 FINISH LINE DETECTED! Stopping Robot.")
             self.set_state(STATE_FINISHED)
-            self.cmd_buffer.clear() 
-            twist = Twist()
-            self.publisher_drive.publish(twist)
 
     def sign_callback(self, msg):
         new_sign = msg.data
         now = self.get_clock().now().nanoseconds / 1e9
 
-        # 대기 중이거나 끝났으면 무시
-        if self.drive_state == STATE_FINISHED or self.drive_state == STATE_WAITING_FOR_SYSTEM: return
-        if new_sign in self.detected_signs: return
         if self.drive_state != STATE_NORMAL: return
+        if new_sign in self.detected_signs: return
+        
+        # [수정] Horn은 독립적인 동작이므로, 쿨다운만 체크하고 바로 실행
+        if new_sign == 'horn':
+            if now - self.last_buzzer_time > 2.0:
+                self.beep_buzzer() # <--- 이 함수가 없어서 오류남
+                self.last_buzzer_time = now
+            return
 
+        # --- NEW SIGN DETECTION START ---
         self.get_logger().info(f'>>> NEW SIGN DETECTED: {new_sign}')
-        self.detected_signs.add(new_sign)
+        self.detected_signs.add(new_sign) 
+        self.current_sign = new_sign     
 
         if new_sign == 'stop':
             self.stop_wait_time = 5.0
             self.next_state_after_stop = STATE_NORMAL
             self.set_state(STATE_STOP_WAIT)
+
         elif new_sign == 'traffic_light_green' or new_sign == 'traffic_light':
             self.stop_wait_time = 3.0
-            self.next_state_after_stop = STATE_PRE_TURN_STRAIGHT
-            self.turn_direction = -1.0 
+            self.next_state_after_stop = STATE_TURNING 
+            self.turn_direction = -1.0 # 우회전
             self.set_state(STATE_STOP_WAIT)
-        elif new_sign == 'horn':
-            self.beep_buzzer()
-        elif new_sign == 'slow':
-            self.slow_mode_end_time = now + 5.0
-            self.get_logger().info("Slow mode activated for 5 seconds.")
-        elif new_sign == 'left_turn':
-            self.turn_direction = 1.0
-            self.set_state(STATE_PRE_TURN_STRAIGHT)
-        elif new_sign == 'right_turn':
-            self.turn_direction = -1.0
-            self.set_state(STATE_PRE_TURN_STRAIGHT)
 
-    def set_state(self, new_state):
-        self.drive_state = new_state
-        self.state_start_time = self.get_clock().now().nanoseconds / 1e9
-        self.get_logger().info(f'State changed to: {self.drive_state}')
+        elif new_sign == self.slow_sign_name:
+            self.slow_mode_end_time = now + 5.0
+        
+        elif new_sign in ['left_turn', 'right_turn']:
+            self.turn_direction = 1.0 if new_sign == 'left_turn' else -1.0
+            self.set_state(STATE_TURNING) 
 
     def beep_buzzer(self):
+        """ [복구됨] 부저 실행 함수 (self 인자 포함) """
         self.get_logger().info('BEEP! (1 sec)')
         lgpio.tx_pwm(self.h, BUZZER_PIN, BUZZER_FREQ, 50) 
         self.create_timer(1.0, self.buzzer_off_callback) 
 
     def buzzer_off_callback(self):
+        """ [복구됨] 부저 정지 함수 (self 인자 포함) """
         lgpio.tx_pwm(self.h, BUZZER_PIN, BUZZER_FREQ, 0)
 
+    # --- [복구됨] 모터 명령 큐 발행 함수 ---
     def timer_callback(self):
         now = self.get_clock().now().nanoseconds / 1e9
         
-        if self.drive_state == STATE_FINISHED or self.drive_state == STATE_WAITING_FOR_SYSTEM:
+        if self.drive_state in [STATE_FINISHED, STATE_WAITING_FOR_SYSTEM]:
             self.cmd_buffer.clear()
             stop_msg = Twist()
             self.publisher_drive.publish(stop_msg)
@@ -188,8 +207,7 @@ class PIDControllerNode(Node):
         now = self.get_clock().now().nanoseconds / 1e9
         state_duration = now - self.state_start_time
 
-        # 대기 중이거나 끝났으면 정지
-        if self.drive_state == STATE_FINISHED or self.drive_state == STATE_WAITING_FOR_SYSTEM:
+        if self.drive_state in [STATE_FINISHED, STATE_WAITING_FOR_SYSTEM]:
             return
 
         try:
@@ -200,36 +218,48 @@ class PIDControllerNode(Node):
         linear_vel = 0.0
         angular_vel = 0.0
         
+        # --- 상태 머신 로직 ---
         if self.drive_state == STATE_NORMAL:
-            linear_vel = self.base_speed
-            if now < self.slow_mode_end_time:
-                linear_vel *= 0.5 
+            # 1. PID 조향각 먼저 계산
             steering_angle = self.calculate_pid(bev_binary, h, w, now)
+            
+            reduction_factor = 0.05 
+            target_speed = self.base_speed - (abs(steering_angle) * reduction_factor)
+            
+            # 최소 속도 제한 (너무 느려서 멈추지 않게 0.12m/s 정도는 유지)
+            linear_vel = max(target_speed, 0.12)
+            
+            # 표지판 감속 로직 (가변 속도와 중첩 적용)
+            if self.slow_sign_name in self.detected_signs:
+                if now < self.slow_mode_end_time:
+                    linear_vel *= 0.5 
+                else:
+                    self.get_logger().info("Slow mode 5s expired. Resuming full speed.")
+                    self.cleanup_after_sign(self.slow_sign_name) 
+
             angular_vel = steering_angle
 
         elif self.drive_state == STATE_STOP_WAIT:
+            # (이하 동일)
             linear_vel = 0.0
             angular_vel = 0.0
             if state_duration >= self.stop_wait_time:
+                self.cleanup_after_sign(self.current_sign)
                 self.set_state(self.next_state_after_stop)
 
-        elif self.drive_state == STATE_PRE_TURN_STRAIGHT:
-            linear_vel = self.base_speed
-            angular_vel = 0.0
-            if state_duration >= 1.0:
-                self.set_state(STATE_TURNING)
-
         elif self.drive_state == STATE_TURNING:
+            # (이하 동일)
             linear_vel = 0.0  
             angular_vel = self.turn_direction * 2.0 
-            if state_duration >= 1.4: 
+            if state_duration >= 1.9: 
                 self.set_state(STATE_POST_TURN_STRAIGHT)
 
         elif self.drive_state == STATE_POST_TURN_STRAIGHT:
+            # (이하 동일)
             linear_vel = self.base_speed
             angular_vel = 0.0
             if state_duration >= 1.0:
-                self.current_sign = None
+                self.cleanup_after_sign(self.current_sign)
                 self.set_state(STATE_NORMAL)
 
         twist = Twist()
@@ -243,7 +273,7 @@ class PIDControllerNode(Node):
         lane_slice = bev_binary[int(y_row), :]
         indices = np.nonzero(lane_slice)[0]
         
-        center_offset = 30.0
+        center_offset = -15.0
         robot_center_px = (w / 2.0) + center_offset
         target_px = robot_center_px
         
@@ -286,8 +316,9 @@ def main(args=None):
     try: rclpy.spin(node)
     except KeyboardInterrupt: pass
     finally:
-        node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok():
+            node.destroy_node()
+            rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
