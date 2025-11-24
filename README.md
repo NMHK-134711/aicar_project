@@ -59,7 +59,7 @@ Docker 컨테이너는 RPi 5의 GPIO 및 하드웨어에 접근하기 위해 `--
   * **작업:**
     1.  **모델 로딩:** YOLOv8 (TFLite float32) 모델을 로드합니다. 모델 로딩이 완료되기 전까지는 추론을 수행하지 않습니다.
     2.  **객체 감지:** `stop`, `left_turn`, `right_turn`, `horn`, `slow(20)`, `traffic_light` 등을 인식합니다.
-    3.  **시스템 준비 알림:** 모델 로딩이 완료되면 주기적으로 시스템 준비 신호를 보냅니다.
+    3.  **시스템 준비 알림:** 모델 로딩이 완료되면 시스템 준비 신호를 보냅니다.
   * **발행 (Output):** * `/sign_detection` (Type: `std_msgs/String`): 인식된 표지판의 명령어를 발행합니다.
       * `/system_status` (Type: `std_msgs/String`): 모델 로드 완료 시 `"system_ready"` 메시지를 발행하여 주행 시작을 알립니다.
 
